@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 // Declarar uma constante
 #define ATTEMPTS_NUMBER 5
@@ -11,8 +13,13 @@ int main() {
   printf("* GUESS THE SECRET NUMBER *\n");
   printf("***************************\n");
 
+  int secondsPastTimeStamp = time(0);
+
+  // set the seed for pseudo random number generation
+  srand(secondsPastTimeStamp);
+
   // Generate random number (not so random right now)
-  secretNumber = 10;
+  secretNumber = rand() % 100;
   attempt = 0;
   points = 1000;
 
@@ -53,7 +60,7 @@ int main() {
       printf("The secret number is lower than that! \n");
     }
 
-    points -= (double)(playerGuess + secretNumber) / (double)2;
+    points -= abs((double)(playerGuess - secretNumber) / (double)2);
 
     printf("******************************************************\n");
   }
